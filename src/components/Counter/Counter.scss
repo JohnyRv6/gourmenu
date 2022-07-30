@@ -1,0 +1,42 @@
+.counter-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba($color: #fff, $alpha: 0.9);
+    padding: 5px;
+    user-select: none;
+    border-radius: 10px;
+    >.countButton{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        border: 0;
+        background: transparent;
+        color: #0e2c28;
+        transition: 0.2s ease-in-out;
+        border-radius: 50%;
+        margin: 0 2px;
+        font-size: 1.1em;
+        &:hover{
+            background: rgba($color: #0e2c28, $alpha: 0.5);
+            color: #fff;
+        }
+    }
+    >h2{
+        color: #0e2c28;
+    }
+    >.addButton{
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #0e2c28;
+        transition: 0.2s ease;
+        padding: 10px 2px;
+        border-radius: 10px;
+        &:hover{
+            background: rgba($color: #0e2c28, $alpha: 0.5);
+            color: #fff;
+        }
+    }
+}

@@ -29,6 +29,7 @@ header{
     justify-content: flex-end;
     align-items: center;
     transition: 1s;
+    z-index: 50;
     >.banner{
         position: absolute;
         top: 0;
@@ -47,13 +48,13 @@ header{
         font-weight: 700;
         transition: 1s;
         text-decoration: none;
-        z-index: 1;
+        z-index: 50;
         text-shadow: 1px 1px 15px #000;
     }
     >nav{
         position: relative;
         display: flex;
-        z-index: 1;
+        z-index: 50;
         >ul{
             position: relative;
             display: flex;
