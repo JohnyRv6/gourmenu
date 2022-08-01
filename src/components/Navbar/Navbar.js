@@ -1,39 +1,51 @@
-import { useEffect, useState } from 'react';
-import imageHeader from '../../assets/images/header.jpg';
+import { useContext, useEffect, useState } from 'react';
+import { StoreContext } from '../../store/storeProvider';
+import { types } from '../../store/storeReducer';
+import { useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import imageHeader from '../../assets/images/banner-platos.jpeg';
 import './Navbar.scss';
 
 const Navbar = () => {
 
-    const [scrollPosition, setScrollPosition] = useState('');
     const [toggleActive, setToggleActive] = useState(false);
+
+    const [store, dispatch] = useContext(StoreContext);
+    const { navbarPosition } = store;
+
+    const { pathname } = useLocation();
 
     const handleScroll = () => {
         const position = window.pageYOffset;
-        if (position > 0) setScrollPosition('sticky');
-        else { setScrollPosition(''); setToggleActive(false) };
+        if (position > 0) dispatch({ type: types.changeNavbar, payload: 'sticky' });
+        else { dispatch({ type: types.changeNavbar, payload: '' }); setToggleActive(false) };
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        if (pathname === '/') {
+            window.addEventListener('scroll', handleScroll, { passive: true });
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
+            return () => {
+                window.removeEventListener('scroll', handleScroll);
+            }
+        } else {
+            dispatch({ type: types.changeNavbar, payload: 'sticky' });
         }
-    })
+    }, [navbarPosition])
 
 
     return (
-        <header className={scrollPosition}>
+        <header className={navbarPosition}>
             <img src={imageHeader} alt="fogón de gas" className='banner' />
-            <a href="https://www.youtube.com/" target='_blank' className='logo' rel="noopener noreferrer">U-Gourmen</a>
+            <Link onClick={() => { dispatch({ type: types.changeNavbar, payload: '' }) }} to="/" className='logo'>U-Gourmen</Link>
             <div className={toggleActive ? 'toggle active' : 'toggle'} onClick={() => setToggleActive(!toggleActive)}></div>
             <nav className={toggleActive ? 'active' : ''}>
                 <ul>
-                    <li><a href="https://www.youtube.com/" target='_blank' rel="noopener noreferrer">Inicio</a></li>
-                    <li><a href="https://www.youtube.com/" target='_blank' rel="noopener noreferrer">¿Quienes sómos?</a></li>
-                    <li><a href="https://www.youtube.com/" target='_blank' rel="noopener noreferrer">Servicios</a></li>
-                    <li><a href="https://www.youtube.com/" target='_blank' rel="noopener noreferrer">Fotos</a></li>
-                    <li><a href="https://www.youtube.com/" target='_blank' rel="noopener noreferrer">Contactanos</a></li>
+                    <li><Link onClick={() => { dispatch({ type: types.changeNavbar, payload: '' }) }} to="/">Inicio</Link></li>
+                    <li><Link onClick={() => { dispatch({ type: types.changeNavbar, payload: 'sticky' }) }} to="/we-are">¿Quienes sómos?</Link></li>
+                    <li><Link onClick={() => { dispatch({ type: types.changeNavbar, payload: 'sticky' }) }} to="/services">Servicios</Link></li>
+                    <li><Link onClick={() => { dispatch({ type: types.changeNavbar, payload: 'sticky' }) }} to="/gallery">Fotos</Link></li>
+                    <li><Link onClick={() => { dispatch({ type: types.changeNavbar, payload: 'sticky' }) }} to="/contact-us">Contáctanos</Link></li>
                 </ul>
             </nav>
         </header>

@@ -2,11 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 50vh;
-    background: linear-gradient(#0e2c28, #fff 50%, #fff 50%, #0e2c28 80%);
+    min-height: 25vh;
     display: flex;
     margin: 50px 0;
-    width: 700px;
+    width: 600px;
     >.card{
         position: relative;
         width: 300px;
@@ -85,11 +84,29 @@
                 width: 100%;
                 margin: 50px 0 0 0;
                 justify-content: space-around;
-                align-items: center;
+                align-items: flex-end;
                 >h2{
                     color: #fff;
                     font-weight: 100;
                     font-size: 1.5em;
+                }
+            }
+            >.see-more{
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                height: 10%;
+                width: 100%;
+                >a{
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: 600;
+                    transition: 0.2s ease;
+                    font-size: 1.1em;
+                    &:hover{
+                        // filter: brightness(2.0);
+                        text-shadow: 2px 2px 5px #fff;
+                    }
                 }
             }
         }
